@@ -3,7 +3,7 @@ const config = {
     // Backend API URL - Update this with your Railway backend URL
     API_BASE_URL: window.location.hostname === 'localhost' 
         ? "http://localhost:5000" 
-        : "https://your-railway-backend-url.railway.app", // ⚠️ UPDATE THIS URL
+        : "https://web-production-c6d3.up.railway.app", // ✅ Updated with actual Railway URL
     
     // App settings
     APP_NAME: "nGAGE AI Feedback",
