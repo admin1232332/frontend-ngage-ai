@@ -1239,6 +1239,74 @@
       // Form submission with improved mobile UX
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
+        
+        const userInput = contextInput.value.trim();
+        const userTone = document.querySelector('.tone-option.active')?.dataset.tone;
+        
+        if (!userInput || !userTone) {
+            showError("Please provide both context and select a tone.");
+            return;
+        }
+        
+        // Hide any existing messages
+        errorDiv.style.display = 'none';
+        loadingDiv.style.display = 'flex';
+        generateBtn.disabled = true;
+        
+        try {
+            // First analyze the context
+            const analyzeResponse = await fetch(`${API_BASE_URL}/api/analyze-context`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    context: userInput,
+                    tone: userTone
+                })
+            });
+            
+            const analyzeData = await analyzeResponse.json();
+            
+            if (analyzeData.mismatch) {
+                showMismatchConfirmation(analyzeData.context_sentiment, analyzeData.requested_tone);
+            }
+            
+            // Generate feedback
+            const response = await fetch(`${API_BASE_URL}/api/generate-feedback`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    context: userInput,
+                    tone: userTone
+                })
+            });
+            
+            const data = await response.json();
+            
+            if (!response.ok) {
+                if (data.error && data.error.includes("not allowed to process conversational inputs")) {
+                    showWarning(data.error);
+                } else {
+                    showError(data.error || "Failed to generate feedback");
+                }
+                return;
+            }
+            
+            resultText.textContent = data.feedback;
+            resultSection.style.display = 'block';
+            showSuccess("Feedback generated successfully!");
+            
+        } catch (error) {
+            showError("An error occurred. Please try again.");
+            console.error("Error:", error);
+        } finally {
+            loadingDiv.style.display = 'none';
+            generateBtn.disabled = false;
+        }
+        e.preventDefault();
 
         const context = contextInput.value.trim();
         const selectedTone = document.querySelector(
@@ -1324,8 +1392,8 @@
           );
 
           if (!response.ok) {
-            const error = await response.json();
-            throw new Error(error.error || "Failed to generate feedback");
+            const errorData = await response.json();
+            throw new Error(errorData.error || errorData.details || "Failed to generate feedback");
           }
 
           const data = await response.json();
