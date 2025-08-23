@@ -15,7 +15,9 @@ const config = {
         ANALYZE_CONTEXT: "/api/analyze-context",
         HEALTH: "/api/health",
         ANALYTICS: "/api/analytics",
-        RECENT_FEEDBACK: "/api/recent-feedback"
+        RECENT_FEEDBACK: "/api/recent-feedback",
+        RECOMMEND_ATTRIBUTES: "/api/recommend-attributes",
+        GET_ATTRIBUTES: "/api/attributes"
     }
 };
 

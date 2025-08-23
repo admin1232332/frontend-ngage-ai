@@ -1029,6 +1029,231 @@
         }
       }
 
+      /* Attribute Suggestion Styles */
+      .suggest-attributes-btn {
+        background: linear-gradient(135deg, #f093fb, #f5576c);
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 25px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 12px;
+        width: 100%;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        box-shadow: 0 5px 15px rgba(240, 147, 251, 0.3);
+        min-height: 44px;
+        touch-action: manipulation;
+      }
+
+      @media (min-width: 480px) {
+        .suggest-attributes-btn {
+          width: auto;
+        }
+      }
+
+      .suggest-attributes-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
+      }
+
+      .suggest-attributes-btn:active {
+        transform: scale(0.98);
+      }
+
+      .suggest-attributes-btn:disabled {
+        background: linear-gradient(135deg, #bdc3c7, #95a5a6);
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: 0 5px 15px rgba(189, 195, 199, 0.3);
+      }
+
+      .attribute-recommendations {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 16px;
+        padding: 20px;
+        border: 2px solid rgba(102, 126, 234, 0.2);
+        margin-top: 12px;
+      }
+
+      .attribute-category {
+        margin-bottom: 20px;
+      }
+
+      .attribute-category:last-child {
+        margin-bottom: 0;
+      }
+
+      .category-title {
+        font-size: 14px;
+        font-weight: 700;
+        color: #667eea;
+        margin-bottom: 10px;
+        padding-bottom: 5px;
+        border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      .attribute-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .attribute-tag {
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        color: #667eea;
+        padding: 8px 14px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 600;
+        border: 2px solid rgba(102, 126, 234, 0.2);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        user-select: none;
+        position: relative;
+        overflow: hidden;
+      }
+
+      @media (min-width: 768px) {
+        .attribute-tag {
+          font-size: 13px;
+          padding: 10px 16px;
+        }
+
+        .attribute-tag:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+        }
+      }
+
+      .attribute-tag.selected {
+        background: linear-gradient(135deg, #667eea, #764ba2);
+        color: white;
+        border-color: #667eea;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+      }
+
+      .attribute-tag::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+      }
+
+      .attribute-tag:hover::before {
+        left: 100%;
+      }
+
+      .attribute-actions {
+        margin-top: 15px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .view-all-btn {
+        background: rgba(102, 126, 234, 0.1);
+        color: #667eea;
+        border: 2px solid rgba(102, 126, 234, 0.3);
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        min-height: 40px;
+        touch-action: manipulation;
+      }
+
+      .view-all-btn:hover {
+        background: rgba(102, 126, 234, 0.2);
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+      }
+
+      .view-all-btn:active {
+        transform: scale(0.98);
+      }
+
+      .selected-attributes-summary {
+        background: linear-gradient(135deg, rgba(46, 213, 115, 0.1), rgba(0, 206, 201, 0.1));
+        border: 2px solid rgba(46, 213, 115, 0.3);
+        border-radius: 12px;
+        padding: 15px;
+        margin-top: 15px;
+        color: #00b894;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      .selected-attributes-summary::before {
+        content: "✅ ";
+        margin-right: 5px;
+      }
+
+      /* All Attributes Modal Styles */
+      .all-attributes-modal .modal {
+        max-width: 800px;
+        max-height: 90vh;
+        overflow-y: auto;
+      }
+
+      .all-attributes-content {
+        max-height: 60vh;
+        overflow-y: auto;
+        padding-right: 10px;
+      }
+
+      .all-attributes-content::-webkit-scrollbar {
+        width: 6px;
+      }
+
+      .all-attributes-content::-webkit-scrollbar-track {
+        background: rgba(102, 126, 234, 0.1);
+        border-radius: 3px;
+      }
+
+      .all-attributes-content::-webkit-scrollbar-thumb {
+        background: rgba(102, 126, 234, 0.3);
+        border-radius: 3px;
+      }
+
+      .all-attributes-content::-webkit-scrollbar-thumb:hover {
+        background: rgba(102, 126, 234, 0.5);
+      }
+
+      .attribute-loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        padding: 20px;
+        color: #667eea;
+        font-weight: 600;
+        font-size: 14px;
+      }
+
+      .attribute-spinner {
+        width: 20px;
+        height: 20px;
+        border: 2px solid rgba(102, 126, 234, 0.2);
+        border-top: 2px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
       /* High contrast mode support */
       @media (prefers-contrast: high) {
         .feedback-card {
@@ -1040,6 +1265,10 @@
         }
 
         .generate-btn {
+          border: 2px solid #333;
+        }
+
+        .attribute-tag {
           border: 2px solid #333;
         }
       }
@@ -1130,6 +1359,22 @@
                 placeholder="Describe what happened... (any language is fine)&#10;&#10;Examples:&#10;• usne deadline pe kaam deliver kiya, achi communication thi&#10;• presentation achhi thi but thoda fast thi&#10;• good work on project, helped team members"
                 required
               ></textarea>
+              <button type="button" class="suggest-attributes-btn" id="suggestAttributesBtn" style="display: none;">
+                Get AI Attribute Suggestions
+              </button>
+            </div>
+
+            <!-- Attribute Recommendations Section -->
+            <div class="form-group" id="attributeRecommendations" style="display: none;">
+              <label class="form-label">Recommended Attributes</label>
+              <div class="attribute-recommendations" id="recommendedAttributesList">
+                <!-- AI recommendations will be populated here -->
+              </div>
+              <div class="attribute-actions">
+                <button type="button" class="view-all-btn" id="viewAllAttributesBtn">
+                  📋 View All Attributes
+                </button>
+              </div>
             </div>
 
             <div class="form-group">
@@ -1198,6 +1443,10 @@
       // Use configuration from config.js
       const API_BASE_URL = config.API_BASE_URL;
 
+      // Global variables for attribute management
+      let selectedAttributes = [];
+      let allAttributes = {};
+
       // DOM elements
       const form = document.getElementById("feedbackForm");
       const contextInput = document.getElementById("contextInput");
@@ -1208,6 +1457,10 @@
       const loadingDiv = document.getElementById("loadingDiv");
       const errorDiv = document.getElementById("errorDiv");
       const toneOptions = document.querySelectorAll(".tone-option");
+      const suggestAttributesBtn = document.getElementById("suggestAttributesBtn");
+      const attributeRecommendations = document.getElementById("attributeRecommendations");
+      const recommendedAttributesList = document.getElementById("recommendedAttributesList");
+      const viewAllAttributesBtn = document.getElementById("viewAllAttributesBtn");
 
       // Tone selection with improved mobile interaction
       toneOptions.forEach((option) => {
@@ -1236,24 +1489,393 @@
         option.setAttribute("role", "radio");
       });
 
+      // Context input monitoring for attribute suggestions
+      let contextTimeout;
+      contextInput.addEventListener("input", () => {
+        const context = contextInput.value.trim();
+        
+        // Show/hide suggest button based on context length
+        if (context.length >= 20) {
+          suggestAttributesBtn.style.display = "block";
+        } else {
+          suggestAttributesBtn.style.display = "none";
+          attributeRecommendations.style.display = "none";
+        }
+        
+        // Clear previous timeout
+        clearTimeout(contextTimeout);
+        
+        // Auto-suggest after user stops typing (optional)
+        contextTimeout = setTimeout(() => {
+          if (context.length >= 50) {
+            // Auto-suggest for longer contexts
+            // suggestAttributes(); // Uncomment to enable auto-suggest
+          }
+        }, 2000);
+      });
+
+      // Attribute suggestion functionality
+      if (suggestAttributesBtn) {
+        console.log('✅ Suggest attributes button found');
+        suggestAttributesBtn.addEventListener("click", async () => {
+          console.log('🔘 Suggest attributes button clicked');
+          const context = contextInput.value.trim();
+          console.log('📝 Context from input:', context);
+          
+          if (!context) {
+            console.log('❌ No context provided');
+            showError("Please enter some context first.");
+            return;
+          }
+          
+          console.log('🚀 Calling suggestAttributes...');
+          await suggestAttributes(context);
+        });
+      } else {
+        console.error('❌ Suggest attributes button not found!');
+      }
+
+      // View all attributes functionality
+      if (viewAllAttributesBtn) {
+        console.log('✅ View all attributes button found');
+        viewAllAttributesBtn.addEventListener("click", async () => {
+          await showAllAttributesModal();
+        });
+      } else {
+        console.error('❌ View all attributes button not found!');
+      }
+
+      // Attribute suggestion function
+      async function suggestAttributes(context) {
+        try {
+          console.log('🎯 suggestAttributes called with context:', context);
+          console.log('🔗 API_BASE_URL:', API_BASE_URL);
+          console.log('🔗 Full URL:', `${API_BASE_URL}/api/recommend-attributes`);
+          
+          suggestAttributesBtn.disabled = true;
+          suggestAttributesBtn.innerHTML = '<div class="attribute-spinner"></div> Getting Suggestions...';
+          
+          const requestData = {
+            context: context,
+            max_recommendations: 5
+          };
+          
+          console.log('📝 Request data:', requestData);
+          
+          const response = await fetch(`${API_BASE_URL}/api/recommend-attributes`, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(requestData),
+          });
+
+          console.log('📊 Response status:', response.status);
+          console.log('📊 Response ok:', response.ok);
+
+          if (!response.ok) {
+            const errorText = await response.text();
+            console.error('❌ Response error text:', errorText);
+            throw new Error(`HTTP error! status: ${response.status}, text: ${errorText}`);
+          }
+
+          const data = await response.json();
+          console.log('✅ Response data:', data);
+          
+          if (data.error) {
+            throw new Error(data.error);
+          }
+
+          // Store all attributes for reference
+          allAttributes = data.all_attributes;
+          console.log('📋 All attributes stored:', Object.keys(allAttributes).length, 'categories');
+          
+          // Display recommendations
+          console.log('🎯 Displaying recommendations:', data.recommendations);
+          displayAttributeRecommendations(data.recommendations);
+          
+          showSuccess("AI attribute suggestions generated!");
+          
+        } catch (error) {
+          console.error("❌ Error getting attribute suggestions:", error);
+          console.error("❌ Error stack:", error.stack);
+          showError("Failed to get attribute suggestions. Please try again.");
+        } finally {
+          suggestAttributesBtn.disabled = false;
+          suggestAttributesBtn.innerHTML = 'Get AI Attribute Suggestions';
+        }
+      }
+
+      // Display attribute recommendations
+      function displayAttributeRecommendations(recommendations) {
+        recommendedAttributesList.innerHTML = "";
+        
+        if (!recommendations.categories || Object.keys(recommendations.categories).length === 0) {
+          recommendedAttributesList.innerHTML = `
+            <div class="attribute-loading">
+              <span>No specific attributes recommended. Try providing more detailed context.</span>
+            </div>
+          `;
+          attributeRecommendations.style.display = "block";
+          return;
+        }
+
+        // Create category sections
+        Object.entries(recommendations.categories).forEach(([category, attributes]) => {
+          const categoryDiv = document.createElement("div");
+          categoryDiv.className = "attribute-category";
+          
+          const categoryTitle = document.createElement("div");
+          categoryTitle.className = "category-title";
+          categoryTitle.textContent = category;
+          
+          const attributeTags = document.createElement("div");
+          attributeTags.className = "attribute-tags";
+          
+          attributes.forEach(attribute => {
+            const tag = document.createElement("div");
+            tag.className = "attribute-tag";
+            tag.textContent = attribute;
+            tag.dataset.attribute = attribute;
+            tag.dataset.category = category;
+            
+            // Check if already selected
+            if (selectedAttributes.includes(attribute)) {
+              tag.classList.add("selected");
+            }
+            
+            // Add click handler
+            tag.addEventListener("click", () => toggleAttribute(tag, attribute));
+            
+            attributeTags.appendChild(tag);
+          });
+          
+          categoryDiv.appendChild(categoryTitle);
+          categoryDiv.appendChild(attributeTags);
+          recommendedAttributesList.appendChild(categoryDiv);
+        });
+
+        // Show selected attributes summary if any
+        updateSelectedAttributesSummary();
+        
+        attributeRecommendations.style.display = "block";
+        
+        // Scroll to recommendations on mobile
+        if (window.innerWidth <= 768) {
+          attributeRecommendations.scrollIntoView({
+            behavior: "smooth",
+            block: "nearest"
+          });
+        }
+      }
+
+      // Toggle attribute selection
+      function toggleAttribute(tagElement, attribute) {
+        const index = selectedAttributes.indexOf(attribute);
+        
+        if (index > -1) {
+          // Remove from selection
+          selectedAttributes.splice(index, 1);
+          tagElement.classList.remove("selected");
+        } else {
+          // Add to selection (limit to 8 attributes)
+          if (selectedAttributes.length >= 8) {
+            showWarning("Maximum 8 attributes can be selected. Please deselect some first.");
+            return;
+          }
+          selectedAttributes.push(attribute);
+          tagElement.classList.add("selected");
+        }
+        
+        updateSelectedAttributesSummary();
+        
+        // Provide haptic feedback on supported devices
+        if (navigator.vibrate) {
+          navigator.vibrate(30);
+        }
+      }
+
+      // Update selected attributes summary
+      function updateSelectedAttributesSummary() {
+        let existingSummary = document.querySelector(".selected-attributes-summary");
+        
+        if (selectedAttributes.length === 0) {
+          if (existingSummary) {
+            existingSummary.remove();
+          }
+          return;
+        }
+        
+        if (!existingSummary) {
+          existingSummary = document.createElement("div");
+          existingSummary.className = "selected-attributes-summary";
+          recommendedAttributesList.appendChild(existingSummary);
+        }
+        
+        existingSummary.textContent = `Selected ${selectedAttributes.length} attribute${selectedAttributes.length !== 1 ? 's' : ''}: ${selectedAttributes.join(", ")}`;
+      }
+
+      // Show all attributes modal
+      async function showAllAttributesModal() {
+        try {
+          // Fetch all attributes if not already loaded
+          if (Object.keys(allAttributes).length === 0) {
+            const response = await fetch(`${API_BASE_URL}/api/attributes`);
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const data = await response.json();
+            allAttributes = data.attributes;
+          }
+
+          // Create modal HTML
+          const modalHtml = `
+            <div class="modal-overlay all-attributes-modal" id="allAttributesModal">
+              <div class="modal">
+                <div class="modal-header">
+                  <div class="modal-icon">📋</div>
+                  <div class="modal-title">All Available Attributes</div>
+                </div>
+                <div class="modal-content">
+                  <p>Select attributes that are relevant to your feedback context:</p>
+                  <div class="all-attributes-content" id="allAttributesContent">
+                    <!-- Content will be populated here -->
+                  </div>
+                </div>
+                <div class="modal-buttons">
+                  <button class="modal-btn modal-btn-secondary" id="modalClose">Close</button>
+                  <button class="modal-btn modal-btn-primary" id="modalApply">Apply Selection</button>
+                </div>
+              </div>
+            </div>
+          `;
+
+          // Add modal to page
+          document.body.insertAdjacentHTML("beforeend", modalHtml);
+
+          const modal = document.getElementById("allAttributesModal");
+          const modalContent = document.getElementById("allAttributesContent");
+          const closeBtn = document.getElementById("modalClose");
+          const applyBtn = document.getElementById("modalApply");
+
+          // Populate all attributes
+          Object.entries(allAttributes).forEach(([category, attributes]) => {
+            const categoryDiv = document.createElement("div");
+            categoryDiv.className = "attribute-category";
+            
+            const categoryTitle = document.createElement("div");
+            categoryTitle.className = "category-title";
+            categoryTitle.textContent = category;
+            
+            const attributeTags = document.createElement("div");
+            attributeTags.className = "attribute-tags";
+            
+            attributes.forEach(attribute => {
+              const tag = document.createElement("div");
+              tag.className = "attribute-tag";
+              tag.textContent = attribute;
+              tag.dataset.attribute = attribute;
+              
+              // Check if already selected
+              if (selectedAttributes.includes(attribute)) {
+                tag.classList.add("selected");
+              }
+              
+              // Add click handler
+              tag.addEventListener("click", () => {
+                const index = selectedAttributes.indexOf(attribute);
+                if (index > -1) {
+                  selectedAttributes.splice(index, 1);
+                  tag.classList.remove("selected");
+                } else {
+                  if (selectedAttributes.length >= 8) {
+                    showWarning("Maximum 8 attributes can be selected.");
+                    return;
+                  }
+                  selectedAttributes.push(attribute);
+                  tag.classList.add("selected");
+                }
+              });
+              
+              attributeTags.appendChild(tag);
+            });
+            
+            categoryDiv.appendChild(categoryTitle);
+            categoryDiv.appendChild(attributeTags);
+            modalContent.appendChild(categoryDiv);
+          });
+
+          // Prevent body scroll
+          document.body.style.overflow = "hidden";
+
+          // Handle close
+          const closeModal = () => {
+            document.body.style.overflow = "";
+            modal.remove();
+          };
+
+          closeBtn.addEventListener("click", closeModal);
+          
+          applyBtn.addEventListener("click", () => {
+            updateSelectedAttributesSummary();
+            showSuccess(`${selectedAttributes.length} attributes selected!`);
+            closeModal();
+          });
+
+          // Handle click outside modal
+          modal.addEventListener("click", (e) => {
+            if (e.target === modal && window.innerWidth >= 768) {
+              closeModal();
+            }
+          });
+
+          // Handle escape key
+          const handleEscape = (e) => {
+            if (e.key === "Escape") {
+              closeModal();
+              document.removeEventListener("keydown", handleEscape);
+            }
+          };
+          document.addEventListener("keydown", handleEscape);
+
+        } catch (error) {
+          console.error("Error loading all attributes:", error);
+          showError("Failed to load attributes. Please try again.");
+        }
+      }
+
       // Form submission with improved mobile UX
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
         
         const userInput = contextInput.value.trim();
-        const userTone = document.querySelector('.tone-option.active')?.dataset.tone;
+        const userTone = document.querySelector('[data-tone].tone-option.active')?.dataset.tone;
+        const userStyle = document.querySelector('[data-style].tone-option.active')?.dataset.style;
         
-        if (!userInput || !userTone) {
-            showError("Please provide both context and select a tone.");
+        if (!userInput || !userTone || !userStyle) {
+            showError("Please provide context and select both tone and style.");
             return;
         }
         
         // Hide any existing messages
         errorDiv.style.display = 'none';
-        loadingDiv.style.display = 'flex';
+        loadingDiv.style.display = 'block';
         generateBtn.disabled = true;
+        generateBtn.textContent = "Generating...";
+        generateBtn.setAttribute("aria-busy", "true");
+        
+        // Scroll to loading section on mobile
+        if (window.innerWidth <= 768) {
+          loadingDiv.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        }
         
         try {
+            console.log('🚀 Starting feedback generation process...');
+            console.log('Context:', userInput);
+            console.log('Tone:', userTone);
+            console.log('Style:', userStyle);
+            console.log('Selected Attributes:', selectedAttributes);
+            
             // First analyze the context
             const analyzeResponse = await fetch(`${API_BASE_URL}/api/analyze-context`, {
                 method: 'POST',
@@ -1269,10 +1891,23 @@
             const analyzeData = await analyzeResponse.json();
             
             if (analyzeData.mismatch) {
-                showMismatchConfirmation(analyzeData.context_sentiment, analyzeData.requested_tone);
+                const shouldProceed = await showMismatchConfirmation(
+                    analyzeData.context_sentiment, 
+                    analyzeData.requested_tone
+                );
+                
+                if (!shouldProceed) {
+                    // User chose to cancel
+                    generateBtn.disabled = false;
+                    generateBtn.textContent = "Generate Feedback";
+                    generateBtn.setAttribute("aria-busy", "false");
+                    loadingDiv.style.display = "none";
+                    return;
+                }
             }
             
             // Generate feedback
+            console.log('📝 Generating feedback with AI...');
             const response = await fetch(`${API_BASE_URL}/api/generate-feedback`, {
                 method: 'POST',
                 headers: {
@@ -1280,7 +1915,9 @@
                 },
                 body: JSON.stringify({
                     context: userInput,
-                    tone: userTone
+                    tone: userTone,
+                    style: userStyle,
+                    selected_attributes: selectedAttributes.length > 0 ? selectedAttributes : undefined
                 })
             });
             
@@ -1297,130 +1934,25 @@
             
             resultText.textContent = data.feedback;
             resultSection.style.display = 'block';
+            
+            // Scroll to result on mobile
+            if (window.innerWidth <= 768) {
+                resultSection.scrollIntoView({
+                    behavior: "smooth",
+                    block: "nearest",
+                });
+            }
+            
             showSuccess("Feedback generated successfully!");
             
         } catch (error) {
-            showError("An error occurred. Please try again.");
-            console.error("Error:", error);
+            console.error("Error generating feedback:", error);
+            showError("Failed to generate feedback. Please try again.");
         } finally {
             loadingDiv.style.display = 'none';
             generateBtn.disabled = false;
-        }
-        e.preventDefault();
-
-        const context = contextInput.value.trim();
-        const selectedTone = document.querySelector(
-          "[data-tone].tone-option.active"
-        ).dataset.tone;
-        const selectedStyle = document.querySelector(
-          "[data-style].tone-option.active"
-        ).dataset.style;
-
-        if (!context) {
-          showError("Please provide some context for the feedback.");
-          return;
-        }
-
-        // Show loading with improved mobile feedback
-        generateBtn.disabled = true;
-        generateBtn.textContent = "Generating...";
-        generateBtn.setAttribute("aria-busy", "true");
-        loadingDiv.style.display = "block";
-        resultSection.style.display = "none";
-        errorDiv.style.display = "none";
-
-        // Scroll to loading section on mobile
-        if (window.innerWidth <= 768) {
-          loadingDiv.scrollIntoView({ behavior: "smooth", block: "nearest" });
-        }
-
-        // First, check for context-tone mismatch
-        try {
-          const analysisResponse = await fetch(
-            `${API_BASE_URL}/api/analyze-context`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                context: context,
-                tone: selectedTone,
-              }),
-            }
-          );
-
-          if (analysisResponse.ok) {
-            const analysisData = await analysisResponse.json();
-
-            if (analysisData.mismatch) {
-              // Show confirmation modal
-              const shouldProceed = await showMismatchConfirmation(
-                analysisData.context_sentiment,
-                analysisData.requested_tone
-              );
-
-              if (!shouldProceed) {
-                // User chose to cancel
-                generateBtn.disabled = false;
-                generateBtn.textContent = "Generate Feedback";
-                generateBtn.setAttribute("aria-busy", "false");
-                loadingDiv.style.display = "none";
-                return;
-              }
-            }
-          }
-        } catch (error) {
-          console.warn("Context analysis failed, proceeding anyway:", error);
-        }
-
-        try {
-          // Generate feedback
-          const response = await fetch(
-            `${API_BASE_URL}/api/generate-feedback`,
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({
-                context: context,
-                tone: selectedTone,
-                style: selectedStyle,
-              }),
-            }
-          );
-
-          if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || errorData.details || "Failed to generate feedback");
-          }
-
-          const data = await response.json();
-
-          // Show result
-          resultText.textContent = data.feedback;
-          resultSection.style.display = "block";
-          loadingDiv.style.display = "none";
-
-          // Scroll to result on mobile
-          if (window.innerWidth <= 768) {
-            resultSection.scrollIntoView({
-              behavior: "smooth",
-              block: "nearest",
-            });
-          }
-
-          // Show success message
-          showSuccess("Feedback generated successfully!");
-        } catch (error) {
-          console.error("Error generating feedback:", error);
-          showError("Failed to generate feedback. Please try again.");
-          loadingDiv.style.display = "none";
-        } finally {
-          generateBtn.disabled = false;
-          generateBtn.textContent = "Generate Feedback";
-          generateBtn.setAttribute("aria-busy", "false");
+            generateBtn.textContent = "Generate Feedback";
+            generateBtn.setAttribute("aria-busy", "false");
         }
       });
 
