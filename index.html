@@ -1071,6 +1071,85 @@
         box-shadow: 0 5px 15px rgba(189, 195, 199, 0.3);
       }
 
+      /* Context Confirmation Styles */
+      .context-confirmation {
+        background: linear-gradient(
+          135deg,
+          rgba(255, 193, 7, 0.1),
+          rgba(255, 152, 0, 0.1)
+        );
+        border: 2px solid rgba(255, 193, 7, 0.3);
+        border-radius: 12px;
+        padding: 16px;
+        margin-top: 12px;
+        animation: slideIn 0.3s ease-out;
+      }
+
+      .confirmation-message {
+        display: flex;
+        align-items: center;
+        margin-bottom: 12px;
+        font-size: 14px;
+        color: #333;
+      }
+
+      .confirmation-icon {
+        font-size: 18px;
+        margin-right: 8px;
+      }
+
+      .confirmation-buttons {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+
+      .confirmation-btn {
+        flex: 1;
+        min-width: 120px;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+      }
+
+      .yes-btn {
+        background: linear-gradient(135deg, #2ecc71, #27ae60);
+        color: white;
+      }
+
+      .yes-btn:hover {
+        background: linear-gradient(135deg, #27ae60, #229954);
+        transform: translateY(-1px);
+      }
+
+      .no-btn {
+        background: linear-gradient(135deg, #f39c12, #e67e22);
+        color: white;
+      }
+
+      .no-btn:hover {
+        background: linear-gradient(135deg, #e67e22, #d35400);
+        transform: translateY(-1px);
+      }
+
+      @media (max-width: 480px) {
+        .confirmation-buttons {
+          flex-direction: column;
+        }
+
+        .confirmation-btn {
+          min-width: 100%;
+        }
+      }
+
       .attribute-recommendations {
         background: rgba(255, 255, 255, 0.8);
         backdrop-filter: blur(10px);
@@ -1106,7 +1185,11 @@
       }
 
       .attribute-tag {
-        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        background: linear-gradient(
+          135deg,
+          rgba(102, 126, 234, 0.1),
+          rgba(118, 75, 162, 0.1)
+        );
         color: #667eea;
         padding: 8px 14px;
         border-radius: 20px;
@@ -1146,7 +1229,12 @@
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
         transition: left 0.5s ease;
       }
 
@@ -1188,7 +1276,11 @@
       }
 
       .selected-attributes-summary {
-        background: linear-gradient(135deg, rgba(46, 213, 115, 0.1), rgba(0, 206, 201, 0.1));
+        background: linear-gradient(
+          135deg,
+          rgba(46, 213, 115, 0.1),
+          rgba(0, 206, 201, 0.1)
+        );
         border: 2px solid rgba(46, 213, 115, 0.3);
         border-radius: 12px;
         padding: 15px;
@@ -1359,19 +1451,65 @@
                 placeholder="Describe what happened... (any language is fine)&#10;&#10;Examples:&#10;• usne deadline pe kaam deliver kiya, achi communication thi&#10;• presentation achhi thi but thoda fast thi&#10;• good work on project, helped team members"
                 required
               ></textarea>
-              <button type="button" class="suggest-attributes-btn" id="suggestAttributesBtn" style="display: none;">
+              <!-- Context Completion Confirmation -->
+              <div
+                class="context-confirmation"
+                id="contextConfirmation"
+                style="display: none"
+              >
+                <div class="confirmation-message">
+                  <span class="confirmation-icon">✍️</span>
+                  <span class="confirmation-text"
+                    >Have you finished writing your context/notes?</span
+                  >
+                </div>
+                <div class="confirmation-buttons">
+                  <button
+                    type="button"
+                    class="confirmation-btn yes-btn"
+                    id="contextYesBtn"
+                  >
+                    ✅ Yes, Complete
+                  </button>
+                  <button
+                    type="button"
+                    class="confirmation-btn no-btn"
+                    id="contextNoBtn"
+                  >
+                    ✏️ Still Writing
+                  </button>
+                </div>
+              </div>
+
+              <button
+                type="button"
+                class="suggest-attributes-btn"
+                id="suggestAttributesBtn"
+                style="display: none"
+              >
                 Get AI Attribute Suggestions
               </button>
             </div>
 
             <!-- Attribute Recommendations Section -->
-            <div class="form-group" id="attributeRecommendations" style="display: none;">
+            <div
+              class="form-group"
+              id="attributeRecommendations"
+              style="display: none"
+            >
               <label class="form-label">Recommended Attributes</label>
-              <div class="attribute-recommendations" id="recommendedAttributesList">
+              <div
+                class="attribute-recommendations"
+                id="recommendedAttributesList"
+              >
                 <!-- AI recommendations will be populated here -->
               </div>
               <div class="attribute-actions">
-                <button type="button" class="view-all-btn" id="viewAllAttributesBtn">
+                <button
+                  type="button"
+                  class="view-all-btn"
+                  id="viewAllAttributesBtn"
+                >
                   📋 View All Attributes
                 </button>
               </div>
@@ -1457,10 +1595,23 @@
       const loadingDiv = document.getElementById("loadingDiv");
       const errorDiv = document.getElementById("errorDiv");
       const toneOptions = document.querySelectorAll(".tone-option");
-      const suggestAttributesBtn = document.getElementById("suggestAttributesBtn");
-      const attributeRecommendations = document.getElementById("attributeRecommendations");
-      const recommendedAttributesList = document.getElementById("recommendedAttributesList");
-      const viewAllAttributesBtn = document.getElementById("viewAllAttributesBtn");
+      const suggestAttributesBtn = document.getElementById(
+        "suggestAttributesBtn"
+      );
+      const attributeRecommendations = document.getElementById(
+        "attributeRecommendations"
+      );
+      const recommendedAttributesList = document.getElementById(
+        "recommendedAttributesList"
+      );
+      const viewAllAttributesBtn = document.getElementById(
+        "viewAllAttributesBtn"
+      );
+      const contextConfirmation = document.getElementById(
+        "contextConfirmation"
+      );
+      const contextYesBtn = document.getElementById("contextYesBtn");
+      const contextNoBtn = document.getElementById("contextNoBtn");
 
       // Tone selection with improved mobile interaction
       toneOptions.forEach((option) => {
@@ -1491,126 +1642,187 @@
 
       // Context input monitoring for attribute suggestions
       let contextTimeout;
+      let contextConfirmed = false;
+
       contextInput.addEventListener("input", () => {
         const context = contextInput.value.trim();
-        
-        // Show/hide suggest button based on context length
+
+        // Reset confirmation when user types
+        contextConfirmed = false;
+
+        // Show context completion confirmation for meaningful input
         if (context.length >= 20) {
-          suggestAttributesBtn.style.display = "block";
+          showContextConfirmation();
         } else {
+          hideContextConfirmation();
           suggestAttributesBtn.style.display = "none";
           attributeRecommendations.style.display = "none";
         }
-        
+
         // Clear previous timeout
         clearTimeout(contextTimeout);
-        
-        // Auto-suggest after user stops typing (optional)
-        contextTimeout = setTimeout(() => {
-          if (context.length >= 50) {
-            // Auto-suggest for longer contexts
-            // suggestAttributes(); // Uncomment to enable auto-suggest
-          }
-        }, 2000);
       });
+
+      // Context confirmation functions
+      function showContextConfirmation() {
+        if (contextConfirmation && !contextConfirmed) {
+          contextConfirmation.style.display = "block";
+        }
+      }
+
+      function hideContextConfirmation() {
+        if (contextConfirmation) {
+          contextConfirmation.style.display = "none";
+        }
+      }
+
+      // Context confirmation event listeners
+      if (contextYesBtn && contextNoBtn) {
+        contextYesBtn.addEventListener("click", () => {
+          contextConfirmed = true;
+          hideContextConfirmation();
+          suggestAttributesBtn.style.display = "block";
+          showSuccess("Great! Now you can get AI attribute suggestions.");
+        });
+
+        contextNoBtn.addEventListener("click", () => {
+          contextConfirmed = false;
+          hideContextConfirmation();
+          suggestAttributesBtn.style.display = "none";
+          attributeRecommendations.style.display = "none";
+          // Focus back to textarea for continued writing
+          contextInput.focus();
+        });
+      }
 
       // Attribute suggestion functionality
       if (suggestAttributesBtn) {
-        console.log('✅ Suggest attributes button found');
+        console.log("✅ Suggest attributes button found");
         suggestAttributesBtn.addEventListener("click", async () => {
-          console.log('🔘 Suggest attributes button clicked');
+          console.log("🔘 Suggest attributes button clicked");
           const context = contextInput.value.trim();
-          console.log('📝 Context from input:', context);
-          
+          const words = context.split(/\s+/).filter((word) => word.length > 0);
+          console.log("📝 Context from input:", context);
+          console.log(
+            "📊 Word count:",
+            words.length,
+            "Character count:",
+            context.length
+          );
+
           if (!context) {
-            console.log('❌ No context provided');
+            console.log("❌ No context provided");
             showError("Please enter some context first.");
             return;
           }
-          
-          console.log('🚀 Calling suggestAttributes...');
+
+          if (!contextConfirmed) {
+            showError(
+              "Please confirm that you have finished writing your context first."
+            );
+            return;
+          }
+
+          // Context is already confirmed by user, proceed with suggestion
+
+          console.log("🚀 Calling suggestAttributes...");
           await suggestAttributes(context);
         });
       } else {
-        console.error('❌ Suggest attributes button not found!');
+        console.error("❌ Suggest attributes button not found!");
       }
 
       // View all attributes functionality
       if (viewAllAttributesBtn) {
-        console.log('✅ View all attributes button found');
+        console.log("✅ View all attributes button found");
         viewAllAttributesBtn.addEventListener("click", async () => {
           await showAllAttributesModal();
         });
       } else {
-        console.error('❌ View all attributes button not found!');
+        console.error("❌ View all attributes button not found!");
       }
 
       // Attribute suggestion function
       async function suggestAttributes(context) {
         try {
-          console.log('🎯 suggestAttributes called with context:', context);
-          console.log('🔗 API_BASE_URL:', API_BASE_URL);
-          console.log('🔗 Full URL:', `${API_BASE_URL}/api/recommend-attributes`);
-          
+          console.log("🎯 suggestAttributes called with context:", context);
+          console.log("🔗 API_BASE_URL:", API_BASE_URL);
+          console.log(
+            "🔗 Full URL:",
+            `${API_BASE_URL}/api/recommend-attributes`
+          );
+
           suggestAttributesBtn.disabled = true;
-          suggestAttributesBtn.innerHTML = '<div class="attribute-spinner"></div> Getting Suggestions...';
-          
+          suggestAttributesBtn.innerHTML =
+            '<div class="attribute-spinner"></div> Getting Suggestions...';
+
           const requestData = {
             context: context,
-            max_recommendations: 5
+            max_recommendations: 5,
           };
-          
-          console.log('📝 Request data:', requestData);
-          
-          const response = await fetch(`${API_BASE_URL}/api/recommend-attributes`, {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify(requestData),
-          });
 
-          console.log('📊 Response status:', response.status);
-          console.log('📊 Response ok:', response.ok);
+          console.log("📝 Request data:", requestData);
+
+          const response = await fetch(
+            `${API_BASE_URL}/api/recommend-attributes`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(requestData),
+            }
+          );
+
+          console.log("📊 Response status:", response.status);
+          console.log("📊 Response ok:", response.ok);
 
           if (!response.ok) {
             const errorText = await response.text();
-            console.error('❌ Response error text:', errorText);
-            throw new Error(`HTTP error! status: ${response.status}, text: ${errorText}`);
+            console.error("❌ Response error text:", errorText);
+            throw new Error(
+              `HTTP error! status: ${response.status}, text: ${errorText}`
+            );
           }
 
           const data = await response.json();
-          console.log('✅ Response data:', data);
-          
+          console.log("✅ Response data:", data);
+
           if (data.error) {
             throw new Error(data.error);
           }
 
           // Store all attributes for reference
           allAttributes = data.all_attributes;
-          console.log('📋 All attributes stored:', Object.keys(allAttributes).length, 'categories');
-          
+          console.log(
+            "📋 All attributes stored:",
+            Object.keys(allAttributes).length,
+            "categories"
+          );
+
           // Display recommendations
-          console.log('🎯 Displaying recommendations:', data.recommendations);
+          console.log("🎯 Displaying recommendations:", data.recommendations);
           displayAttributeRecommendations(data.recommendations);
-          
+
           showSuccess("AI attribute suggestions generated!");
-          
         } catch (error) {
           console.error("❌ Error getting attribute suggestions:", error);
           console.error("❌ Error stack:", error.stack);
           showError("Failed to get attribute suggestions. Please try again.");
         } finally {
           suggestAttributesBtn.disabled = false;
-          suggestAttributesBtn.innerHTML = 'Get AI Attribute Suggestions';
+          suggestAttributesBtn.innerHTML = "Get AI Attribute Suggestions";
         }
       }
 
       // Display attribute recommendations
       function displayAttributeRecommendations(recommendations) {
         recommendedAttributesList.innerHTML = "";
-        
-        if (!recommendations.categories || Object.keys(recommendations.categories).length === 0) {
+
+        if (
+          !recommendations.categories ||
+          Object.keys(recommendations.categories).length === 0
+        ) {
           recommendedAttributesList.innerHTML = `
             <div class="attribute-loading">
               <span>No specific attributes recommended. Try providing more detailed context.</span>
@@ -1621,50 +1833,54 @@
         }
 
         // Create category sections
-        Object.entries(recommendations.categories).forEach(([category, attributes]) => {
-          const categoryDiv = document.createElement("div");
-          categoryDiv.className = "attribute-category";
-          
-          const categoryTitle = document.createElement("div");
-          categoryTitle.className = "category-title";
-          categoryTitle.textContent = category;
-          
-          const attributeTags = document.createElement("div");
-          attributeTags.className = "attribute-tags";
-          
-          attributes.forEach(attribute => {
-            const tag = document.createElement("div");
-            tag.className = "attribute-tag";
-            tag.textContent = attribute;
-            tag.dataset.attribute = attribute;
-            tag.dataset.category = category;
-            
-            // Check if already selected
-            if (selectedAttributes.includes(attribute)) {
-              tag.classList.add("selected");
-            }
-            
-            // Add click handler
-            tag.addEventListener("click", () => toggleAttribute(tag, attribute));
-            
-            attributeTags.appendChild(tag);
-          });
-          
-          categoryDiv.appendChild(categoryTitle);
-          categoryDiv.appendChild(attributeTags);
-          recommendedAttributesList.appendChild(categoryDiv);
-        });
+        Object.entries(recommendations.categories).forEach(
+          ([category, attributes]) => {
+            const categoryDiv = document.createElement("div");
+            categoryDiv.className = "attribute-category";
+
+            const categoryTitle = document.createElement("div");
+            categoryTitle.className = "category-title";
+            categoryTitle.textContent = category;
+
+            const attributeTags = document.createElement("div");
+            attributeTags.className = "attribute-tags";
+
+            attributes.forEach((attribute) => {
+              const tag = document.createElement("div");
+              tag.className = "attribute-tag";
+              tag.textContent = attribute;
+              tag.dataset.attribute = attribute;
+              tag.dataset.category = category;
+
+              // Check if already selected
+              if (selectedAttributes.includes(attribute)) {
+                tag.classList.add("selected");
+              }
+
+              // Add click handler
+              tag.addEventListener("click", () =>
+                toggleAttribute(tag, attribute)
+              );
+
+              attributeTags.appendChild(tag);
+            });
+
+            categoryDiv.appendChild(categoryTitle);
+            categoryDiv.appendChild(attributeTags);
+            recommendedAttributesList.appendChild(categoryDiv);
+          }
+        );
 
         // Show selected attributes summary if any
         updateSelectedAttributesSummary();
-        
+
         attributeRecommendations.style.display = "block";
-        
+
         // Scroll to recommendations on mobile
         if (window.innerWidth <= 768) {
           attributeRecommendations.scrollIntoView({
             behavior: "smooth",
-            block: "nearest"
+            block: "nearest",
           });
         }
       }
@@ -1672,7 +1888,7 @@
       // Toggle attribute selection
       function toggleAttribute(tagElement, attribute) {
         const index = selectedAttributes.indexOf(attribute);
-        
+
         if (index > -1) {
           // Remove from selection
           selectedAttributes.splice(index, 1);
@@ -1680,15 +1896,17 @@
         } else {
           // Add to selection (limit to 8 attributes)
           if (selectedAttributes.length >= 8) {
-            showWarning("Maximum 8 attributes can be selected. Please deselect some first.");
+            showWarning(
+              "Maximum 8 attributes can be selected. Please deselect some first."
+            );
             return;
           }
           selectedAttributes.push(attribute);
           tagElement.classList.add("selected");
         }
-        
+
         updateSelectedAttributesSummary();
-        
+
         // Provide haptic feedback on supported devices
         if (navigator.vibrate) {
           navigator.vibrate(30);
@@ -1697,22 +1915,28 @@
 
       // Update selected attributes summary
       function updateSelectedAttributesSummary() {
-        let existingSummary = document.querySelector(".selected-attributes-summary");
-        
+        let existingSummary = document.querySelector(
+          ".selected-attributes-summary"
+        );
+
         if (selectedAttributes.length === 0) {
           if (existingSummary) {
             existingSummary.remove();
           }
           return;
         }
-        
+
         if (!existingSummary) {
           existingSummary = document.createElement("div");
           existingSummary.className = "selected-attributes-summary";
           recommendedAttributesList.appendChild(existingSummary);
         }
-        
-        existingSummary.textContent = `Selected ${selectedAttributes.length} attribute${selectedAttributes.length !== 1 ? 's' : ''}: ${selectedAttributes.join(", ")}`;
+
+        existingSummary.textContent = `Selected ${
+          selectedAttributes.length
+        } attribute${
+          selectedAttributes.length !== 1 ? "s" : ""
+        }: ${selectedAttributes.join(", ")}`;
       }
 
       // Show all attributes modal
@@ -1762,25 +1986,25 @@
           Object.entries(allAttributes).forEach(([category, attributes]) => {
             const categoryDiv = document.createElement("div");
             categoryDiv.className = "attribute-category";
-            
+
             const categoryTitle = document.createElement("div");
             categoryTitle.className = "category-title";
             categoryTitle.textContent = category;
-            
+
             const attributeTags = document.createElement("div");
             attributeTags.className = "attribute-tags";
-            
-            attributes.forEach(attribute => {
+
+            attributes.forEach((attribute) => {
               const tag = document.createElement("div");
               tag.className = "attribute-tag";
               tag.textContent = attribute;
               tag.dataset.attribute = attribute;
-              
+
               // Check if already selected
               if (selectedAttributes.includes(attribute)) {
                 tag.classList.add("selected");
               }
-              
+
               // Add click handler
               tag.addEventListener("click", () => {
                 const index = selectedAttributes.indexOf(attribute);
@@ -1796,10 +2020,10 @@
                   tag.classList.add("selected");
                 }
               });
-              
+
               attributeTags.appendChild(tag);
             });
-            
+
             categoryDiv.appendChild(categoryTitle);
             categoryDiv.appendChild(attributeTags);
             modalContent.appendChild(categoryDiv);
@@ -1815,7 +2039,7 @@
           };
 
           closeBtn.addEventListener("click", closeModal);
-          
+
           applyBtn.addEventListener("click", () => {
             updateSelectedAttributesSummary();
             showSuccess(`${selectedAttributes.length} attributes selected!`);
@@ -1837,7 +2061,6 @@
             }
           };
           document.addEventListener("keydown", handleEscape);
-
         } catch (error) {
           console.error("Error loading all attributes:", error);
           showError("Failed to load attributes. Please try again.");
@@ -1847,112 +2070,129 @@
       // Form submission with improved mobile UX
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-        
+
         const userInput = contextInput.value.trim();
-        const userTone = document.querySelector('[data-tone].tone-option.active')?.dataset.tone;
-        const userStyle = document.querySelector('[data-style].tone-option.active')?.dataset.style;
-        
+        const userTone = document.querySelector(
+          "[data-tone].tone-option.active"
+        )?.dataset.tone;
+        const userStyle = document.querySelector(
+          "[data-style].tone-option.active"
+        )?.dataset.style;
+
         if (!userInput || !userTone || !userStyle) {
-            showError("Please provide context and select both tone and style.");
-            return;
+          showError("Please provide context and select both tone and style.");
+          return;
         }
-        
+
         // Hide any existing messages
-        errorDiv.style.display = 'none';
-        loadingDiv.style.display = 'block';
+        errorDiv.style.display = "none";
+        loadingDiv.style.display = "block";
         generateBtn.disabled = true;
         generateBtn.textContent = "Generating...";
         generateBtn.setAttribute("aria-busy", "true");
-        
+
         // Scroll to loading section on mobile
         if (window.innerWidth <= 768) {
           loadingDiv.scrollIntoView({ behavior: "smooth", block: "nearest" });
         }
-        
+
         try {
-            console.log('🚀 Starting feedback generation process...');
-            console.log('Context:', userInput);
-            console.log('Tone:', userTone);
-            console.log('Style:', userStyle);
-            console.log('Selected Attributes:', selectedAttributes);
-            
-            // First analyze the context
-            const analyzeResponse = await fetch(`${API_BASE_URL}/api/analyze-context`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    context: userInput,
-                    tone: userTone
-                })
+          console.log("🚀 Starting feedback generation process...");
+          console.log("Context:", userInput);
+          console.log("Tone:", userTone);
+          console.log("Style:", userStyle);
+          console.log("Selected Attributes:", selectedAttributes);
+
+          // First analyze the context
+          const analyzeResponse = await fetch(
+            `${API_BASE_URL}/api/analyze-context`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                context: userInput,
+                tone: userTone,
+              }),
+            }
+          );
+
+          const analyzeData = await analyzeResponse.json();
+
+          if (analyzeData.mismatch) {
+            const shouldProceed = await showMismatchConfirmation(
+              analyzeData.context_sentiment,
+              analyzeData.requested_tone
+            );
+
+            if (!shouldProceed) {
+              // User chose to cancel
+              generateBtn.disabled = false;
+              generateBtn.textContent = "Generate Feedback";
+              generateBtn.setAttribute("aria-busy", "false");
+              loadingDiv.style.display = "none";
+              return;
+            }
+          }
+
+          // Generate feedback
+          console.log("📝 Generating feedback with AI...");
+          const response = await fetch(
+            `${API_BASE_URL}/api/generate-feedback`,
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                context: userInput,
+                tone: userTone,
+                style: userStyle,
+                selected_attributes:
+                  selectedAttributes.length > 0
+                    ? selectedAttributes
+                    : undefined,
+              }),
+            }
+          );
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            if (
+              data.error &&
+              data.error.includes(
+                "not allowed to process conversational inputs"
+              )
+            ) {
+              showWarning(data.error);
+            } else {
+              showError(data.error || "Failed to generate feedback");
+            }
+            return;
+          }
+
+          resultText.textContent = data.feedback;
+          resultSection.style.display = "block";
+
+          // Scroll to result on mobile
+          if (window.innerWidth <= 768) {
+            resultSection.scrollIntoView({
+              behavior: "smooth",
+              block: "nearest",
             });
-            
-            const analyzeData = await analyzeResponse.json();
-            
-            if (analyzeData.mismatch) {
-                const shouldProceed = await showMismatchConfirmation(
-                    analyzeData.context_sentiment, 
-                    analyzeData.requested_tone
-                );
-                
-                if (!shouldProceed) {
-                    // User chose to cancel
-                    generateBtn.disabled = false;
-                    generateBtn.textContent = "Generate Feedback";
-                    generateBtn.setAttribute("aria-busy", "false");
-                    loadingDiv.style.display = "none";
-                    return;
-                }
-            }
-            
-            // Generate feedback
-            console.log('📝 Generating feedback with AI...');
-            const response = await fetch(`${API_BASE_URL}/api/generate-feedback`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    context: userInput,
-                    tone: userTone,
-                    style: userStyle,
-                    selected_attributes: selectedAttributes.length > 0 ? selectedAttributes : undefined
-                })
-            });
-            
-            const data = await response.json();
-            
-            if (!response.ok) {
-                if (data.error && data.error.includes("not allowed to process conversational inputs")) {
-                    showWarning(data.error);
-                } else {
-                    showError(data.error || "Failed to generate feedback");
-                }
-                return;
-            }
-            
-            resultText.textContent = data.feedback;
-            resultSection.style.display = 'block';
-            
-            // Scroll to result on mobile
-            if (window.innerWidth <= 768) {
-                resultSection.scrollIntoView({
-                    behavior: "smooth",
-                    block: "nearest",
-                });
-            }
-            
-            showSuccess("Feedback generated successfully!");
-            
+          }
+
+          showSuccess("Feedback generated successfully!");
         } catch (error) {
-            console.error("Error generating feedback:", error);
-            showError("Failed to generate feedback. Please try again.");
+          console.error("Error generating feedback:", error);
+          showError("Failed to generate feedback. Please try again.");
         } finally {
-            loadingDiv.style.display = 'none';
-            generateBtn.disabled = false;
-            generateBtn.textContent = "Generate Feedback";
-            generateBtn.setAttribute("aria-busy", "false");
+          loadingDiv.style.display = "none";
+          generateBtn.disabled = false;
+          generateBtn.textContent = "Generate Feedback";
+          generateBtn.setAttribute("aria-busy", "false");
         }
       });
 
